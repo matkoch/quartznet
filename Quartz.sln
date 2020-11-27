@@ -48,12 +48,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.Benchmark", "src\Qua
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.OpenTracing", "src\Quartz.OpenTracing\Quartz.OpenTracing.csproj", "{A41539B5-18CC-4881-9E88-3C0BA55716D3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{512A523F-F51B-4C80-8759-B2F966132A81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{512A523F-F51B-4C80-8759-B2F966132A81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512A523F-F51B-4C80-8759-B2F966132A81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0545C4AC-45BE-47C3-81B7-1592579B9C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0545C4AC-45BE-47C3-81B7-1592579B9C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0545C4AC-45BE-47C3-81B7-1592579B9C31}.Release|Any CPU.ActiveCfg = Release|Any CPU

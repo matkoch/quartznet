@@ -39,8 +39,8 @@ _dotCover*/
 *.resharper
 [Tt]est[Rr]esult*
 
-#Project files
-[Bb]uild/
+#Artifact files
+artifacts/
 
 #Subversion files
 .svn
