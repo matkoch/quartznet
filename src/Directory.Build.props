@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 
-    <OutputPath>..\..\build\$(Configuration)\$(MSBuildProjectName)</OutputPath>
+    <OutputPath>..\..\artifacts\bin\$(Configuration)\$(MSBuildProjectName)</OutputPath>
 
 	<Title>Quartz.NET</Title>
     <Product>Quartz.NET</Product>
