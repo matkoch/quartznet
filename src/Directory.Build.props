@@ -69,6 +69,10 @@
 
   <ItemGroup>
     <None Include="..\quartz-logo-small.png" Pack="true" Visible="false" PackagePath=""/>
-  </ItemGroup>  
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
 
 </Project>
