@@ -23,16 +23,14 @@ Skip:
 - Clean
 - Compile
 - Pack
-- Publish
+- Push
 - Restore
-- Test
 Target:
 - Clean
 - Compile
 - Pack
-- Publish
+- Push
 - Restore
-- Test
 Verbosity:
 - Minimal
 - Normal
