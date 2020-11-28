@@ -23,7 +23,8 @@ using static Nuke.GitHub.GitHubTasks;
 [GitHubActions(
     "continues",
     GitHubActionsImage.MacOsLatest,
-    InvokedTargets = new[]{nameof(Publish)},
+    On = new[] {GitHubActionsTrigger.Push},
+    InvokedTargets = new[] {nameof(Publish)},
     ImportGitHubTokenAs = nameof(GitHubToken))]
 class Build : NukeBuild
 {
@@ -37,6 +38,7 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")] readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
     [Solution] readonly Solution Solution;
+
     [GitRepository] readonly GitRepository GitRepository;
     // [GitVersion(UpdateBuildNumber = true)] readonly GitVersion GitVersion;
 

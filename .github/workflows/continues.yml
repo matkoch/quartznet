@@ -16,7 +16,7 @@
 
 name: continues
 
-on:
+on: [push]
 
 jobs:
   macOS-latest:
