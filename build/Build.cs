@@ -1,23 +1,30 @@
-﻿using Nuke.Common;
+﻿using System.Linq;
+
+using Nuke.Common;
+using Nuke.Common.ChangeLog;
 using Nuke.Common.CI;
 using Nuke.Common.CI.AppVeyor;
+using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Common.Tools.GitVersion;
+using Nuke.Common.Tools.GitHub;
 using Nuke.Common.Utilities.Collections;
+using Nuke.GitHub;
 
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using static Nuke.GitHub.GitHubTasks;
 
 [CheckBuildProjectConfigurations]
-[AppVeyor(
-    AppVeyorImage.VisualStudioLatest,
-    AutoGenerate = false,
-    Services = new[] {AppVeyorService.MYSQL, AppVeyorService.PostgreSQL})]
+[GitHubActions(
+    "continues",
+    GitHubActionsImage.MacOsLatest,
+    InvokedTargets = new[]{nameof(Publish)},
+    ImportGitHubTokenAs = nameof(GitHubToken))]
 class Build : NukeBuild
 {
     /// Support plugins are available for:
@@ -88,18 +95,26 @@ class Build : NukeBuild
 
     readonly string NuGetSource = "https://api.nuget.org/v3/index.json";
     [Parameter] readonly string NuGetApiKey;
+    [Parameter] readonly string GitHubToken;
 
     Target Publish => _ => _
         .DependsOn(Pack)
-        .Requires(() => NuGetApiKey)
-        .Executes(() =>
+        // .DependsOn(Test)
+        // .Requires(() => NuGetApiKey)
+        .Executes(async () =>
         {
-            DotNetNuGetPush(_ => _
-                    .SetSource(NuGetSource)
-                    .SetApiKey(NuGetApiKey)
-                    .CombineWith(PackagesDirectory.GlobFiles("*.nupkg"), (_, v) => _
-                        .SetTargetPath(v)),
-                completeOnFailure: true,
-                degreeOfParallelism: 5);
+            await PublishRelease(_ => _
+                .SetName("vBla")
+                .SetTag("v3.2.3")
+                .SetReleaseNotes(ChangelogTasks.GetNuGetReleaseNotes(RootDirectory / "Changelog.md"))
+                .SetArtifactPaths(PackagesDirectory.GlobFiles("*.nupkg").Select(x => x.ToString()).ToArray())
+                .SetToken(GitHubToken));
+            // DotNetNuGetPush(_ => _
+            //         .SetSource(NuGetSource)
+            //         .SetApiKey(NuGetApiKey)
+            //         .CombineWith(PackagesDirectory.GlobFiles("*.nupkg"), (_, v) => _
+            //             .SetTargetPath(v)),
+            //     completeOnFailure: true,
+            //     degreeOfParallelism: 5);
         });
 }
