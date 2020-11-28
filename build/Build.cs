@@ -105,10 +105,11 @@ class Build : NukeBuild
         // .Requires(() => NuGetApiKey)
         .Executes(async () =>
         {
+            // var releaseNotes = ChangelogTasks.GetNuGetReleaseNotes(RootDirectory / "Changelog.md");
             await PublishRelease(_ => _
                 .SetName("vBla")
                 .SetTag("v3.2.3")
-                .SetReleaseNotes(ChangelogTasks.GetNuGetReleaseNotes(RootDirectory / "Changelog.md"))
+                .SetReleaseNotes("rel")
                 .SetArtifactPaths(PackagesDirectory.GlobFiles("*.nupkg").Select(x => x.ToString()).ToArray())
                 .SetToken(GitHubToken));
             // DotNetNuGetPush(_ => _
