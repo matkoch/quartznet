@@ -5,8 +5,10 @@ using Nuke.Common.Execution;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Utilities.Collections;
+using Nuke.Components;
 
 using static Nuke.Common.IO.FileSystemTasks;
+// ReSharper disable RedundantExtendsListEntry
 
 [CheckBuildProjectConfigurations]
 // [GitHubActions(
@@ -19,6 +21,8 @@ class Build : NukeBuild,
     IHazGitVersion,
     IHazGitRepository,
     IHazChangelog,
+    IHazSolution,
+    IHazConfiguration,
     IRestore,
     ICompile,
     ITest,

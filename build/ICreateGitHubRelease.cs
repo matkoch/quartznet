@@ -2,6 +2,7 @@
 
 using Nuke.Common;
 using Nuke.Common.Tools.GitHub;
+using Nuke.Components;
 using Nuke.GitHub;
 
 using static Nuke.Common.ValueInjection.ValueInjectionUtility;

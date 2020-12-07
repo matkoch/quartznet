@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Nuke.Common" Version="5.0.0" />
     <PackageReference Include="Nuke.GitHub" Version="2.0.0" />
+    <NukeExternalFiles Include="https://github.com/nuke-build/nuke/tree/develop/source/Nuke.Components" BasePath="components" Visible="false" />
   </ItemGroup>
 
 </Project>
